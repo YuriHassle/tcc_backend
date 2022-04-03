@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InnController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -21,6 +22,7 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('users', UserController::class);
+    Route::resource('inns', InnController::class);
     Route::get('teste', [AuthController::class, 'getLoggedUser']);
     Route::post('logout', [AuthController::class, 'logout']);
 });
