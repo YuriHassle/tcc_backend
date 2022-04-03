@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('address_id')->constrained();
+            $table->foreignId('address_id')->constrained()->nullable();
             $table->string('name');
             $table->string('cpf');
             $table->string('phone')->nullable();
