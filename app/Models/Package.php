@@ -14,4 +14,9 @@ class Package extends Model
         'name',
         'max_guests',
     ];
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

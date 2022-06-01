@@ -14,6 +14,14 @@ class PackageResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $services = array_column($this->services->toArray(), 'id');
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'max_guests' => $this->max_guests,
+            'services' => $services,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ];
     }
 }

@@ -37,7 +37,11 @@ class ServiceController extends BaseController
     public function store(StoreServiceRequest $request)
     {
         if ($request->validated()) {
-            $service = Service::create($request->all());
+            $items = $request->only(['items'])['items'];
+            $service = $request->except(['items']);
+            $service = Service::create($service);
+
+            $service->items()->sync($items);
             return $this->sendResponse(new ServiceResource($service), 'Serviço criado com sucesso', 201);
         } else {
             return $this->sendError('Erro na validação dos dados.');
@@ -68,7 +72,10 @@ class ServiceController extends BaseController
             return $this->sendError('Erro na validação dos dados');
         }
 
-        $service->update($request->all());
+        $items = $request->only(['items'])['items'];
+        $servicePayload = $request->except(['items']);
+        $service->update($servicePayload);
+        $service->items()->sync($items);
         return $this->sendResponse(new ServiceResource($service), 'Serviço atualizado com sucesso');
     }
 

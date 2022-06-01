@@ -13,4 +13,9 @@ class Service extends Model
         'inn_id',
         'name',
     ];
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class);
+    }
 }

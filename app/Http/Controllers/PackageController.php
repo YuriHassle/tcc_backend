@@ -37,7 +37,11 @@ class PackageController extends BaseController
     public function store(StorePackageRequest $request)
     {
         if ($request->validated()) {
-            $package = Package::create($request->all());
+            $services = $request->only(['services'])['services'];
+            $package = $request->except(['services']);
+            $package = Package::create($package);
+
+            $package->services()->sync($services);
             return $this->sendResponse(new PackageResource($package), 'Pacote criado com sucesso', 201);
         } else {
             return $this->sendError('Erro na validação dos dados.');
@@ -68,7 +72,10 @@ class PackageController extends BaseController
             return $this->sendError('Erro na validação dos dados');
         }
 
-        $package->update($request->all());
+        $services = $request->only(['services'])['services'];
+        $packagePayload = $request->except(['services']);
+        $package->update($packagePayload);
+        $package->services()->sync($services);
         return $this->sendResponse(new PackageResource($package), 'Pacote atualizado com sucesso');
     }
 
