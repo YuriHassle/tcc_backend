@@ -7,6 +7,7 @@ use App\Http\Controllers\InnController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -29,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('items', ItemController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('packages', PackageController::class);
+    Route::resource('bookings', BookingController::class);
     Route::get('user', [AuthController::class, 'getLoggedUser']);
     Route::post('logout', [AuthController::class, 'logout']);
 });

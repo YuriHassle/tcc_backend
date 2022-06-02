@@ -12,6 +12,7 @@ class Package extends Model
     protected $fillable = [
         'inn_id',
         'name',
+        'price',
         'max_guests',
     ];
 
